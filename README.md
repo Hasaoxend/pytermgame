@@ -1,63 +1,116 @@
-# 🐍 PyTermGame
+# 🐍 PyTermGame - ASCII Game Engine
 
 <div align="center">
 
-**A lightweight Python ASCII game engine for terminal**
+**Build retro terminal games with pure Python!**  
+*Tạo game terminal retro với Python thuần!*
 
-[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-*Create retro ASCII games that run directly in your terminal!*
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+[![Platform](https://img.shields.io/badge/Platform-Windows%20|%20Linux%20|%20macOS-lightgrey?style=for-the-badge)](/)
 
 </div>
 
 ---
 
-## ✨ Features
+## 📋 Table of Contents / Mục lục
 
-- 🎮 **Simple Game Loop** - Easy update/draw cycle
-- ⌨️ **Input Handling** - Arrow keys, WASD support
-- 🎨 **ANSI Colors** - Works without curses on Windows
-- 📦 **Entity System** - Sprites, entities, collision
-- 🚀 **No Dependencies** - Pure Python 3.10+
-
----
-
-## 🎮 Demo: Snake Game
-
-```
-+----------------------- SNAKE GAME -----------------------+
-|  Score: 50     BOOST!                      High: 120     |
-|..........................................................|
-|.                                                        .|
-|.       OOOO#                                            .|
-|.                                      *                 .|
-+--WASD:Move | SPACE:Boost | P:Pause | Q:Quit-------------+
-```
-
-### Controls
-- `W/A/S/D` or Arrow keys - Move
-- `SPACE` - **Boost** (2x speed, shrinks snake!)
-- `P` - Pause
-- `Q` - Quit
-- `R` - Restart (after game over)
+1. [About / Giới thiệu](#-about--giới-thiệu)
+2. [Technology / Công nghệ](#️-technology--công-nghệ)
+3. [Installation / Cài đặt](#-installation--cài-đặt)
+4. [Demo](#-demo)
 
 ---
 
-## 🚀 Quick Start
+## 🎯 About / Giới thiệu
+
+**EN:** PyTermGame is a lightweight game engine for creating ASCII games that run directly in the terminal. Designed to be simple, dependency-free, and cross-platform.
+
+**VI:** PyTermGame là một game engine nhẹ để tạo các game ASCII chạy trực tiếp trong terminal. Được thiết kế đơn giản, không phụ thuộc, và đa nền tảng.
+
+### Features / Tính năng
+
+| Feature | Description / Mô tả |
+|---------|---------------------|
+| 🎮 **Game Loop** | Adjustable FPS game loop / Vòng lặp game với FPS tùy chỉnh |
+| ⌨️ **Input** | Arrow keys, WASD support / Hỗ trợ Arrow keys, WASD |
+| 🎨 **Colors** | ANSI terminal colors / Màu sắc ANSI terminal |
+| 📦 **Entities** | Entity/Sprite system / Hệ thống Entity/Sprite |
+| 💥 **Collision** | AABB collision detection / Phát hiện va chạm AABB |
+| 🖥️ **No Dependencies** | Pure Python 3.10+ / Python thuần 3.10+ |
+
+---
+
+## 🛠️ Technology / Công nghệ
+
+### Architecture / Kiến trúc
+
+```
+┌─────────────────────────────────────────┐
+│              Game (Abstract)            │
+│  ┌─────────┬──────────┬──────────────┐  │
+│  │ setup() │ update() │    draw()    │  │
+│  └────┬────┴────┬─────┴───────┬──────┘  │
+│       │         │             │         │
+│  ┌────▼─────────▼─────────────▼──────┐  │
+│  │           Game Loop               │  │
+│  │  while running:                   │  │
+│  │    input → update → draw → sleep  │  │
+│  └───────────────────────────────────┘  │
+└─────────────────────────────────────────┘
+           │           │           │
+    ┌──────▼───┐ ┌─────▼────┐ ┌────▼─────┐
+    │  Screen  │ │  Input   │ │ Entities │
+    └──────────┘ └──────────┘ └──────────┘
+```
+
+### Core Modules / Các module chính
+
+| Module | Description / Mô tả |
+|--------|---------------------|
+| `engine.py` | Game loop, lifecycle / Vòng lặp game |
+| `screen.py` | Terminal rendering / Hiển thị terminal |
+| `input.py` | Keyboard input / Đầu vào bàn phím |
+| `entities.py` | Sprites, entities / Đối tượng game |
+| `collision.py` | Collision detection / Phát hiện va chạm |
+
+### Tech Stack
+
+- **Language:** Python 3.10+
+- **Rendering:** ANSI Escape Codes
+- **Input:** `msvcrt` (Windows) / `curses` (Unix)
+- **Dependencies:** None / Không có
+
+---
+
+## 📦 Installation / Cài đặt
+
+### Requirements / Yêu cầu
+- Python 3.10+
+- ANSI-compatible terminal
+
+### Setup / Thiết lập
 
 ```bash
-# Clone
-git clone https://github.com/yourusername/pytermgame.git
+# Clone repository
+git clone https://github.com/Hasaoxend/pytermgame.git
 cd pytermgame
 
-# Run Snake game (no install needed!)
+# Run Snake game / Chạy game Snake
 python -m games.snake
 ```
 
----
+### Controls / Điều khiển
 
-## 📖 Create Your Own Game
+| Key / Phím | Function / Chức năng |
+|------------|----------------------|
+| `W` `A` `S` `D` / `↑` `←` `↓` `→` | Move / Di chuyển |
+| `SPACE` | Boost 2x speed (shrinks snake) / Tăng tốc 2x (rắn ngắn dần) |
+| `P` | Pause / Tạm dừng |
+| `R` | Restart / Chơi lại |
+| `Q` | Quit / Thoát |
+
+### Create Your Own Game / Tạo game riêng
 
 ```python
 from pytermgame.engine import Game
@@ -66,8 +119,7 @@ from pytermgame.utils import Color
 
 class MyGame(Game):
     def setup(self):
-        self.x = self.width // 2
-        self.y = self.height // 2
+        self.x, self.y = self.width // 2, self.height // 2
         
     def update(self, dt):
         key = self.get_key()
@@ -86,31 +138,64 @@ if __name__ == "__main__":
 
 ---
 
-## 📁 Project Structure
+## 🎮 Demo
+
+### Snake Game
+
+```
++----------------------- SNAKE GAME -----------------------+
+|  Score: 120            BOOST!                 High: 250  |
+|..........................................................|
+|.                                                        .|
+|.       OOOOOOO                                          .|
+|.             O                                          .|
+|.             OOOOO#                         *           .|
+|.                                                        .|
++---WASD:Move | SPACE:Boost | P:Pause | Q:Quit------------+
+```
+
+### Game Over
+
+```
++----------------------- SNAKE GAME -----------------------+
+|                 +----------------------------+           |
+|                 |        GAME OVER!          |           |
+|                 |    Final Score: 180        |           |
+|                 |   Press R to Restart       |           |
+|                 +----------------------------+           |
++----------------------------------------------------------+
+```
+
+### Gameplay
+
+- 🐍 **Classic Snake** - Move, eat, avoid collision / Di chuyển, ăn, tránh va chạm
+- 🚀 **Boost Mode** - 2x speed, snake shrinks / Tốc độ 2x, rắn ngắn dần
+- 📊 **High Score** - Saved per session / Lưu trong phiên
+
+---
+
+## 📁 Project Structure / Cấu trúc
 
 ```
 pytermgame/
-├── pytermgame/      # Core engine
-│   ├── engine.py    # Game loop
-│   ├── screen.py    # Rendering
-│   ├── input.py     # Keyboard
-│   ├── entities.py  # Sprites
-│   └── collision.py # Physics
-├── games/snake/     # Snake demo
-├── examples/        # Code samples
-└── tests/           # Unit tests
+├── pytermgame/       # Core engine
+├── games/snake/      # Snake demo
+├── examples/         # Code samples
+└── tests/            # Unit tests
 ```
 
 ---
 
 ## 📜 License
 
-MIT License - see [LICENSE](LICENSE)
+MIT License - See [LICENSE](LICENSE)
 
 ---
 
 <div align="center">
 
 **Made with ❤️ and Python**
+
+⭐ Star if you like it! / ⭐ Star nếu thấy hay!
 
 </div>
